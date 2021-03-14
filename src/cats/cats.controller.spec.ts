@@ -1,5 +1,6 @@
 import { HttpStatus } from '@nestjs/common'
 import { Test, TestingModule } from '@nestjs/testing'
+import { LoggingInterceptor } from 'src/common/middleware/logging.interceptor'
 import { CatsController } from './cats.controller'
 import { CatsService } from './cats.service'
 import { Cat } from './interfaces/cats.interface'
@@ -43,6 +44,7 @@ describe('CatsController', () => {
             providers: [
                 CatsService,
                 { provide: CatsService, useClass: CatsServiceMock },
+                LoggingInterceptor,
             ],
             controllers: [CatsController],
         }).compile()

@@ -1,5 +1,4 @@
 import { Test, TestingModule } from '@nestjs/testing'
-import { kStringMaxLength } from 'buffer'
 import { ConfigService } from './config.service'
 import { CONFIG_OPTIONS } from './constants'
 
@@ -29,7 +28,7 @@ describe('ConfigService', () => {
         expect(service).toBeDefined()
     })
 
-    it('sdf', () => {
-        expect(service.get['HELLO_MESSAGE']).toBe('Hello there, world!')
+    it('HELLO_MESSAGEの値が取得できること', () => {
+        expect(service.get['HELLO_MESSAGE']).toBe('Hello world!')
     })
 })

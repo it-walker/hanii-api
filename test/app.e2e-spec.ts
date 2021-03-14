@@ -19,4 +19,8 @@ describe('AppController (e2e)', () => {
         return request(app.getHttpServer()).get('/').expect(HttpStatus.OK)
         // ., { message: 'Hello World!' }, done)
     })
+
+    afterAll(async () => {
+        await app.close()
+    })
 })
