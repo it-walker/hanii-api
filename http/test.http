@@ -16,10 +16,28 @@ content-type: application/json
 
 {
     "name": "hani",
-    "age": 5,
+    "age": "5",
     "breed": "茶トラ"
 }
 
 ### GET cats
 GET http://localhost:3002/cats HTTP/1.1
 content-type: application/json
+
+### GET cats
+GET http://localhost:3002/cats/a HTTP/1.1
+content-type: application/json
+
+### GET
+GET http://localhost:3002/ HTTP/1.1
+content-type: application/json
+
+### post user追加
+
+POST http://localhost:3002/users HTTP/1.1
+content-type: application/json
+
+{
+    "firstName": "hiroki",
+    "lastName": "sato"
+}
