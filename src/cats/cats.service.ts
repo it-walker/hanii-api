@@ -1,15 +1,13 @@
-import { Injectable } from '@nestjs/common'
-import { Cat } from './interfaces/cats.interface'
+import { Inject, Injectable } from '@nestjs/common'
+import { Cat } from '../cats/cats.entity'
 
 @Injectable()
 export class CatsService {
-    private readonly cats: Cat[] = []
+    constructor(
+        @Inject('CATS_REPOSITORY') private readonly CATS_REPOSITORY: typeof Cat
+    ) {}
 
-    create(cat: Cat) {
-        this.cats.push(cat)
-    }
-
-    findAll(): Cat[] {
-        return this.cats
+    async findAll(): Promise<Cat[]> {
+        return await this.CATS_REPOSITORY.findAll<Cat>()
     }
 }
