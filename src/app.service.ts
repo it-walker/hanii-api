@@ -5,10 +5,7 @@ import { Sequelize } from 'sequelize-typescript'
 @Injectable()
 export class AppService {
     private helloMessage: string
-    constructor(
-        private configService: ConfigService,
-        private sequelize: Sequelize
-    ) {
+    constructor(private configService: ConfigService) {
         this.helloMessage = this.configService.get('HELLO_MESSAGE')
     }
     getHello(): string {

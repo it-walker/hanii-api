@@ -10,36 +10,38 @@ import {
 
 @Table({ tableName: 'users' })
 export class User extends Model<User> {
-    @Column({
-        type: DataType.BIGINT,
-        allowNull: false,
-        autoIncrement: true,
-        unique: true,
-        primaryKey: true,
-    })
-    public id: number
+    // @Column({
+    //     type: DataType.BIGINT,
+    //     allowNull: false,
+    //     autoIncrement: true,
+    //     unique: true,
+    //     primaryKey: true,
+    // })
+    // public id: number
 
     @Column({
+        type: DataType.STRING,
         allowNull: false,
     })
     name: string
 
     @Column({
+        type: DataType.STRING,
+        unique: true,
         allowNull: false,
-    })
-    age: number
-
-    @Column({
-        allowNull: false,
-        validate: {
-            isEmail: true,
-        },
     })
     email: string
 
-    @CreatedAt public createdAt: Date
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    password: string
 
-    @UpdatedAt public updatedAt: Date
-
-    @DeletedAt public deletedAt: Date
+    @Column({
+        type: DataType.ENUM,
+        values: ['male', 'female'],
+        allowNull: false,
+    })
+    gender: string
 }

@@ -1,13 +1,37 @@
-export const config = {
+import * as dotenv from 'dotenv'
+import { IDatabaseConfig } from './interfaces/dbConfig.interface'
+
+dotenv.config({ debug: true })
+
+export const databaseConfig: IDatabaseConfig = {
     development: {
-        host: process.env.MYSQL_HOST,
-        port: process.env.MYSQL_PORT,
-        database: process.env.MYSQL_DB_NAME,
-        username: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASSWORD,
-        dialect: 'mysql',
+        username: process.env.DB_USER,
+        password: process.env.DB_PASS,
+        database: process.env.DB_NAME_DEVELOPMENT,
+        host: process.env.DB_HOST,
+        port: process.env.DB_PORT,
+        dialect: process.env.DB_DIALECT,
+        autoLoadModels: true,
+        synchronize: true,
+    },
+    test: {
+        username: process.env.DB_USER,
+        password: process.env.DB_PASS,
+        database: process.env.DB_NAME_TEST,
+        host: process.env.DB_HOST,
+        port: process.env.DB_PORT,
+        dialect: process.env.DB_DIALECT,
+        autoLoadModels: true,
+        synchronize: true,
     },
     production: {
-        // todo: 本番用
+        username: process.env.DB_USER,
+        password: process.env.DB_PASS,
+        database: process.env.DB_NAME_PRODUCTION,
+        host: process.env.DB_HOST,
+        port: process.env.DB_PORT,
+        dialect: process.env.DB_DIALECT,
+        autoLoadModels: true,
+        synchronize: true,
     },
 }
