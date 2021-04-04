@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { Cat } from '../cats/cats.entity'
+import { CreateCatDto } from './dto/create-cat.dto'
 
 @Injectable()
 export class CatsService {
@@ -10,4 +11,8 @@ export class CatsService {
     async findAll(): Promise<Cat[]> {
         return await this.CATS_REPOSITORY.findAll<Cat>()
     }
+
+    // async create(createCatDto: CreateCatDto): Promise<Cat> {
+    //     return await this.CATS_REPOSITORY.create(createCatDto)
+    // }
 }
