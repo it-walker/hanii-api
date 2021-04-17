@@ -1,9 +1,24 @@
-version: '3'
-
+version: '3.7'
 services:
-    mysql:
-        image: mysql:5
+    api:
+        container_name: api
+        build: .
+        tty: true
         restart: always
+        ports:
+            - '3002:3002'
+        volumes:
+            - type: bind
+              source: .
+              target: /api
+        depends_on:
+            - db
+    db:
+        container_name: db
+        image: mysql:5.7.29
+        restart: always
+        ports:
+            - '3306:3306'
         environment:
             MYSQL_ROOT_PASSWORD: root
             MYSQL_DATABASE: development
@@ -11,5 +26,3 @@ services:
             - ./docker/db/data:/var/lib/mysql
             - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
             - ./docker/db/sql:/docker-entrypoint-initdb.d
-        ports:
-            - '3306:3306'
