@@ -1,47 +1,29 @@
 import {
-    Table,
+    Entity,
+    PrimaryGeneratedColumn,
     Column,
-    Model,
-    DataType,
-    CreatedAt,
-    UpdatedAt,
-    DeletedAt,
-} from 'sequelize-typescript'
+    OneToMany,
+    JoinTable,
+} from 'typeorm'
+import { Photo } from '../photos/photo.entity'
+@Entity()
+export class User {
+    @PrimaryGeneratedColumn()
+    public id: number
 
-@Table({ tableName: 'users' })
-export class User extends Model<User> {
-    // @Column({
-    //     type: DataType.BIGINT,
-    //     allowNull: false,
-    //     autoIncrement: true,
-    //     unique: true,
-    //     primaryKey: true,
-    // })
-    // public id: number
-
-    @Column({
-        type: DataType.STRING,
-        allowNull: false,
-    })
+    @Column()
     name: string
 
-    @Column({
-        type: DataType.STRING,
-        unique: true,
-        allowNull: false,
-    })
+    @Column()
     email: string
 
-    @Column({
-        type: DataType.STRING,
-        allowNull: false,
-    })
+    @Column()
     password: string
 
-    @Column({
-        type: DataType.ENUM,
-        values: ['male', 'female'],
-        allowNull: false,
-    })
+    @Column()
     gender: string
+
+    @OneToMany((type) => Photo, (photo) => photo.user)
+    @JoinTable()
+    photos: Photo[]
 }

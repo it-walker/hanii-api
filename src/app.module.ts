@@ -1,3 +1,4 @@
+import { Connection } from 'typeorm'
 import {
     MiddlewareConsumer,
     Module,
@@ -5,42 +6,47 @@ import {
     RequestMethod,
     // RequestMethod,
 } from '@nestjs/common'
-import { AppController } from './app.controller'
-import { AppService } from './app.service'
 // import { ConfigModule } from './config/config.module'
 import { ConfigModule } from '@nestjs/config'
 import { CatsModule } from './cats/cats.module'
 import { LoggerMiddleware } from './common/middleware/logger.middleware'
-import { CatsController } from './cats/cats.controller'
-import { SequelizeModule } from '@nestjs/sequelize'
+// import { CatsController } from './cats/cats.controller'
+import { TypeOrmModule } from '@nestjs/typeorm'
 import { UsersModule } from './users/users.module'
 import { DatabaseModule } from './database/database.module'
 import { AuthModule } from './auth/auth.module'
+import { User } from './users/user.entity'
+import { PhotosModule } from './photos/photos.module'
+import { Photo } from './photos/photo.entity'
 
 @Module({
     imports: [
         ConfigModule.forRoot({ isGlobal: true }),
-        DatabaseModule,
-        // ConfigModule.register({ folder: './config' }),
-        // SequelizeModule.forRoot({
-        //     dialect: 'mysql',
-        //     host: 'localhost',
-        //     port: 3306,
-        //     username: 'root',
-        //     password: 'root',
-        //     database: 'development',
-        //     autoLoadModels: true,
-        //     synchronize: true,
-        // }),
-        CatsModule,
+        // DatabaseModule,
+        TypeOrmModule.forRoot({
+            type: 'mysql',
+            host: 'localhost',
+            port: 3306,
+            username: 'root',
+            password: 'root',
+            database: 'development',
+            entities: [User, Photo],
+            synchronize: true,
+            autoLoadEntities: true,
+            logging: true,
+        }),
+        // CatsModule,
         UsersModule,
-        AuthModule,
+        // AuthModule,
+        PhotosModule,
     ],
-    controllers: [AppController],
-    providers: [AppService],
+    controllers: [],
+    providers: [],
 })
-export class AppModule implements NestModule {
-    configure(consumer: MiddlewareConsumer) {
-        consumer.apply(LoggerMiddleware)
-    }
-}
+// export class AppModule implements NestModule {
+//     constructor(private connection: Connection) {}
+//     configure(consumer: MiddlewareConsumer) {
+//         consumer.apply(LoggerMiddleware)
+//     }
+// }
+export class AppModule {}

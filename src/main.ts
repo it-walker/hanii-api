@@ -17,7 +17,7 @@ async function bootstrap() {
     SwaggerModule.setup('api', app, document)
 
     // global endpoints prefix
-    app.setGlobalPrefix('api/v1')
+    app.setGlobalPrefix('hanii-api/v1')
     app.useGlobalPipes(new ValidationPipe())
     app.useGlobalInterceptors(new LoggingInterceptor())
     await app.listen(3002)
