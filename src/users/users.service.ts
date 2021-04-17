@@ -1,61 +1,44 @@
-import { Injectable, Inject } from '@nestjs/common'
-import { USER_REPOSITORY } from 'src/utils/constants'
+import { Injectable } from '@nestjs/common'
+import { InjectRepository, InjectConnection } from '@nestjs/typeorm'
+import { Repository, Connection } from 'typeorm'
 import { User } from './user.entity'
 import { UserDto } from './dto/user.dto'
 
 @Injectable()
 export class UsersService {
     constructor(
-        @Inject(USER_REPOSITORY) private readonly userRepository: typeof User
+        @InjectRepository(User)
+        private readonly repository: Repository<User>,
+        @InjectConnection()
+        private readonly connection: Connection
     ) {}
 
+    async all(): Promise<User[]> {
+        return await this.connection
+            .getRepository(User)
+            .find({ relations: ['photos'] })
+    }
+
+    async one(id: number): Promise<User> {
+        return await this.repository.findOne(id)
+    }
+
     async create(userDto: UserDto): Promise<User> {
-        const user = new User()
-        user.name = userDto.name
-        user.gender = userDto.gender
-        user.email = userDto.email
-        user.password = userDto.password
-        // return user.save()
-        return await this.userRepository.create<User>(user)
-        // return this.userRepository.create(user)
-
-        // try {
-        //     await this.sequelize.transaction(async (t) => {
-        //         const transactionHost = { transaction: t }
-        //         const user = new User()
-        //         user.firstName = createUserDto.firstName
-        //         user.lastName = createUserDto.lastName
-        //         console.log(user)
-        //         await this.userRepository.create(user, transactionHost)
-        //     })
-        // } catch (err) {
-        //     console.log('error だよ!')
-        //     console.log(err)
-        // }
+        return await this.repository.save(userDto)
     }
 
-    async findAll(): Promise<User[]> {
-        return await this.userRepository.findAll()
+    async update(id: number, data: Partial<User>): Promise<void> {
+        const origin = await this.repository.findOne(id)
+        const updateData = { ...origin }
+        await this.repository.save(updateData)
     }
 
-    async findOne(id: string): Promise<User> {
-        return await this.userRepository.findOne({
-            where: {
-                id,
-            },
-        })
-    }
-
-    async remove(id: string): Promise<void> {
-        const user = await this.findOne(id)
-        await user.destroy()
+    async remove(id: number): Promise<void> {
+        const user = await this.repository.findOne(id)
+        await this.repository.remove(user)
     }
 
     async findOneByEmail(email: string): Promise<User> {
-        return await this.userRepository.findOne<User>({ where: { email } })
-    }
-
-    async findOneById(id: number): Promise<User> {
-        return await this.userRepository.findOne<User>({ where: { id } })
+        return await this.repository.findOne({ where: { email } })
     }
 }

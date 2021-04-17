@@ -11,7 +11,7 @@ content-type: application/json
 
 ### post 2
 
-POST http://localhost:3002/cats HTTP/1.1
+POST http://localhost:3002/api/vi/cats HTTP/1.1
 content-type: application/json
 
 {
@@ -41,4 +41,37 @@ content-type: application/json
     "name": "いもうと",
     "age": 10,
     "email": "imouto@gmail.com"
+}
+
+### post user追加
+
+POST http://localhost:3002/hanii-api/v1/photos/create HTTP/1.1
+content-type: application/json
+
+{
+    "name": "りん",
+    "description": "猫の写真",
+    "filename": "rin.jpg",
+    "views": 1,
+    "isPublished": true
+}
+
+### user 追加
+POST http://localhost:3002/hanii-api/v1/users/create HTTP/1.1
+content-type: application/json
+
+{
+    "name": "あああ",
+    "email": "test1@gmail.com",
+    "password": "password",
+    "gender": "男",
+    "photos": [
+        {
+            "name": "りん",
+            "description": "猫の写真",
+            "filename": "rin.jpg",
+            "views": 1,
+            "isPublished": true
+        }
+    ]
 }
