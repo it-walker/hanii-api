@@ -5,7 +5,7 @@ import {
     OneToMany,
     JoinTable,
 } from 'typeorm'
-import { Photo } from '../photos/photo.entity'
+import { Photo } from './photo.entity'
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
@@ -25,5 +25,5 @@ export class User {
 
     @OneToMany((type) => Photo, (photo) => photo.user)
     @JoinTable()
-    photos: Photo[]
+    photos?: Photo[]
 }

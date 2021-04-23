@@ -15,9 +15,9 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { UsersModule } from './users/users.module'
 import { DatabaseModule } from './database/database.module'
 import { AuthModule } from './auth/auth.module'
-import { User } from './users/user.entity'
+import { User } from './database/entities/user.entity'
 import { PhotosModule } from './photos/photos.module'
-import { Photo } from './photos/photo.entity'
+import { Photo } from './database/entities/photo.entity'
 
 @Module({
     imports: [

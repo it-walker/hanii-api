@@ -4,7 +4,7 @@ import { UsersController } from './users.controller'
 // import { DatabaseModule } from 'src/database/database.module'
 import { userProviders } from './users.providers'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { User } from './user.entity'
+import { User } from '../database/entities/user.entity'
 
 @Module({
     // imports: [DatabaseModule],

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
 import { DatabaseModule } from '../database/database.module'
-import { Photo } from './photo.entity'
+import { Photo } from '../database/entities/photo.entity'
 import { photosProviders } from './photos.providers'
 import { PhotosService } from './photos.service'
 import { TypeOrmModule } from '@nestjs/typeorm'

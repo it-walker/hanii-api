@@ -12,7 +12,7 @@ import {
 import { PhotosService } from './photos.service'
 import { CreatePhotoDto } from './dto/create.photo.dto'
 import { UpdatePhotoDto } from './dto/update.photo.dto'
-import { Photo } from './photo.entity'
+import { Photo } from '../database/entities/photo.entity'
 
 @Controller('photos')
 export class PhotosController {

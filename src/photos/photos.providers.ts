@@ -1,6 +1,6 @@
 import { DATABASE_CONNECTION, PHOTO_REPOSITORY } from 'src/utils/constants'
 import { Connection } from 'typeorm'
-import { Photo } from './photo.entity'
+import { Photo } from '../database/entities/photo.entity'
 
 export const photosProviders = [
     {
