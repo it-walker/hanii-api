@@ -1,4 +1,4 @@
-import { User } from './user.entity'
+import { User } from '../database/entities/user.entity'
 import { Connection } from 'typeorm'
 import { DATABASE_CONNECTION, USER_REPOSITORY } from 'src/utils/constants'
 

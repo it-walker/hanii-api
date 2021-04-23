@@ -1,9 +1,9 @@
 import { databaseConfig } from './database.config'
-import { User } from 'src/users/user.entity'
+import { User } from 'src/database/entities/user.entity'
 import { Cat } from 'src/cats/cat.entity'
 import { createConnection } from 'typeorm'
 import { DATABASE_CONNECTION } from 'src/utils/constants'
-import { Photo } from 'src/photos/photo.entity'
+import { Photo } from 'src/database/entities/photo.entity'
 
 export const databaseProviders = [
     {
